@@ -1,0 +1,46 @@
+@use "@angular/material" as mat;
+
+$secondary-palette: (
+  // 50 ... 900
+  50: #ffffff,
+  100: #2413bd,
+  200: #3700b3,
+  300: #3700b3,
+  400: #3700b3,
+  500: #3700b3,
+  600: #3700b3,
+  700: #3700b3,
+  800: #3700b3,
+  900: #3700b3,
+  A100: #3700b3,
+  A200: #3700b3,
+  A400: #3700b3,
+  A700: #3700b3,
+  contrast: (
+    // 50 ... 900
+    50: white,
+    100: white,
+    200: white,
+    300: white,
+    400: white,
+    500: white,
+    600: white,
+    700: white,
+    800: white,
+    900: white,
+    A100: white,
+    A200: white,
+    A400: white,
+    A700: white
+  )
+);
+
+// Define the palettes for your theme using the Material Design palettes available in palette.scss
+// (imported above). For each palette, you can optionally specify a default, lighter, and darker
+// hue. Available color palettes: https://material.io/design/color/
+// DEFAULT
+$my-primary: mat.define-palette($secondary-palette, 50);
+$my-accent: mat.define-palette($secondary-palette, 100);
+// The warn palette is optional (defaults to red).
+// DEFAULT
+$my-danger: mat.define-palette(mat.$red-palette);

@@ -1,0 +1,26 @@
+<form (ngSubmit)="submitForm()">
+	@if (errors && getObjectKeys(errors).length) {
+	<div class="error">
+		<ul>
+			@for (property of getObjectKeys(errors); track property) {
+			<li>{{property}}: {{errors[property]}}</li>
+			}
+		</ul>
+	</div>
+	}
+	<div>
+		<label for="email">Email :</label>
+		<input type="email" id="email" name="email" [(ngModel)]="formData.email" required>
+	</div>
+	<div>
+		<label for="motDePasse">Mot de passe :</label>
+		<input id="motDePasse" type="password" name="motDePasse" [(ngModel)]="formData.motDePasse" required />
+	</div>
+	<div>
+		<button type="submit"
+			[disabled]="loading || (formData.email.length == 0 || formData.motDePasse.length == 0)">Submit</button>
+		@if (loading) {
+		<span>Loading...</span>
+		}
+	</div>
+</form>

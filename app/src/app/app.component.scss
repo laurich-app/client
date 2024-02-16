@@ -1,0 +1,48 @@
+@use "@angular/material" as mat;
+@import "../theme.scss";
+
+.navbar {
+  border-bottom: 1px solid black;
+}
+
+.navbar a,
+.navbar button {
+  padding: 12px 25px;
+  border-radius: 0;
+  transition: 0.25s ease;
+  min-width: 125px;
+}
+
+.navbar a,
+.navbar button {
+  color: black;
+}
+
+.navbar a:hover,
+.navbar button:hover,
+.navbar .active {
+  background-color: mat.get-color-from-palette($my-accent, 100);
+  color: white;
+}
+
+.navbar button {
+  font-size: 17px;
+}
+
+.content-menu {
+  display: flex;
+  width: 100%;
+  justify-content: space-between;
+}
+
+.user-logged {
+  display: inline-block;
+}
+
+.user-logged-span {
+  display: flex;
+  align-items: center;
+  margin-right: 10px;
+  text-transform: uppercase;
+  margin-left: 10px;
+}
