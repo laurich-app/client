@@ -15,6 +15,7 @@ import { Observable } from 'rxjs';
 import { Auth } from './models/auth';
 import { logout } from './store/auth.actions';
 import { Role } from './enums/roles';
+import { UtilisateursService } from './services/utilisateurs.service';
 
 @Component({
   selector: 'app-root',
@@ -37,13 +38,21 @@ export class AppComponent {
 
   auth$!: Observable<Auth>;
 
-  constructor(private store: Store<{ auth: Auth }>, private router: Router) {
+  constructor(
+    private store: Store<{ auth: Auth }>,
+    private router: Router,
+    private utilisateursService: UtilisateursService
+  ) {
     this.auth$ = this.store.select('auth');
   }
 
   public disconnect(): void {
-    this.store.dispatch(logout());
-    this.router.navigateByUrl('');
+    this.utilisateursService.deconnexion().subscribe({
+      next: () => {
+        this.store.dispatch(logout());
+        this.router.navigateByUrl('');
+      },
+    });
   }
 
   public isAdmin(a: Auth): boolean {
