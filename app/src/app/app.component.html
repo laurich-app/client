@@ -25,9 +25,9 @@
         }
         <div class="user-logged">
           @if (a.isLoggedIn) {
-          <span class="user-logged-span">
-            <mat-icon class="user-logged-span-icon" aria-hidden="false">account_circle</mat-icon>
-          </span>
+          <button mat-icon-button [routerLink]="'/profile'">
+            <mat-icon aria-hidden="false">account_circle</mat-icon>
+          </button>
           }
         </div>
       </ng-container>

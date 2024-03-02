@@ -21,10 +21,10 @@ export class CategoriesService {
   public getAll(
     i: PaginateRequestDTO
   ): Observable<PaginateResponseDTO<CategoriesResponseDTO>> {
-    const params: HttpParams = new HttpParams();
+    let params: HttpParams = new HttpParams();
     if (i) {
-      params.set('page', i.page);
-      params.set('limit', i.limit);
+      params = params.append('page', i.page);
+      params = params.append('limit', i.limit);
     }
 
     return this.http.get<PaginateResponseDTO<CategoriesResponseDTO>>(

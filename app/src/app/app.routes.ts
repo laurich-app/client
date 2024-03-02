@@ -6,6 +6,9 @@ import { UtilisateursComponent } from './gestionnaire/utilisateurs/utilisateurs.
 import { GestionnaireComponent } from './gestionnaire/gestionnaire.component';
 import { gestionnaireRoutes } from './gestionnaire/gestionnaire.routes';
 import { GestionnaireGuard } from './guard/gestionnaire.guard';
+import { ProfileComponent } from './profile/profile.component';
+import { profileRoutes } from './profile/profile.routes';
+import { AuthGuard } from './guard/auth.guard';
 
 export const routes: Routes = [
   { path: '', component: AccueilComponent },
@@ -16,5 +19,11 @@ export const routes: Routes = [
     component: GestionnaireComponent,
     children: gestionnaireRoutes,
     canActivate: [GestionnaireGuard],
+  },
+  {
+    path: 'profile',
+    component: ProfileComponent,
+    children: profileRoutes,
+    canActivate: [AuthGuard],
   },
 ];

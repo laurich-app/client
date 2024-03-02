@@ -2,7 +2,7 @@ import { Store } from '@ngrx/store';
 import { lastValueFrom } from 'rxjs';
 import { Auth, Tokens } from '../models/auth';
 import { UtilisateursService } from '../services/utilisateurs.service';
-import { login } from './auth.actions';
+import { login, logout } from './auth.actions';
 import { expireToken } from '../utils/functions';
 
 export class AuthLogic {
@@ -41,9 +41,12 @@ export class AuthLogic {
     }
 
     if (this.isLoading) {
-      while (this.isLoading) {
+      // Juste un compteur au cas où, pour empêcher une boucle infinie
+      let count = 0;
+      while (this.isLoading && count < 15) {
         console.log('this.isloading', this.isLoading);
-        setTimeout(() => {}, 250);
+        count += 1;
+        setTimeout(() => {}, 1000);
       }
       return this.tokens;
     } else {
@@ -55,13 +58,16 @@ export class AuthLogic {
             accessToken: auth.token.accessToken,
             refreshToken: auth.token.refreshToken,
           })
-        );
+        ).catch(() => {
+          throw new Error('Token indisponible');
+        });
         this.isLoading = false;
         this.tokens = tokens;
         store.dispatch(login({ token: tokens }));
         return tokens;
       } catch (e) {
         this.isLoading = false;
+        store.dispatch(logout());
         throw e;
       }
     }

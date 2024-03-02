@@ -24,10 +24,10 @@ export class FournisseursService {
   public getAll(
     i: PaginateRequestDTO
   ): Observable<PaginateResponseDTO<FournisseursResponseDTO>> {
-    const params: HttpParams = new HttpParams();
+    let params: HttpParams = new HttpParams();
     if (i) {
-      params.set('page', i.page);
-      params.set('limit', i.limit);
+      params = params.append('page', i.page);
+      params = params.append('limit', i.limit);
     }
 
     return this.http.get<PaginateResponseDTO<FournisseursResponseDTO>>(

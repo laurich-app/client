@@ -11,7 +11,7 @@ services:
       - 4200:4200
 
   service-passerelle:
-    image: ghcr.io/laurich-app/service-passerelle:latest
+    image: ghcr.io/laurich-app/service-passerelle:1.1.0
     ports:
       - 8080:8080
     environment:
