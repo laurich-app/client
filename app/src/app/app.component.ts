@@ -16,6 +16,8 @@ import { Auth } from './models/auth';
 import { logout } from './store/auth.actions';
 import { Role } from './enums/roles';
 import { UtilisateursService } from './services/utilisateurs.service';
+import { MatBadgeModule } from '@angular/material/badge';
+import { Panier } from './models/panier';
 
 @Component({
   selector: 'app-root',
@@ -29,6 +31,7 @@ import { UtilisateursService } from './services/utilisateurs.service';
     MatToolbarModule,
     MatIconModule,
     MatButtonModule,
+    MatBadgeModule,
   ],
   templateUrl: './app.component.html',
   styleUrl: './app.component.scss',
@@ -37,13 +40,15 @@ export class AppComponent {
   title = 'app';
 
   auth$!: Observable<Auth>;
+  panier$!: Observable<Panier>;
 
   constructor(
-    private store: Store<{ auth: Auth }>,
+    private store: Store<{ auth: Auth; panier: Panier }>,
     private router: Router,
     private utilisateursService: UtilisateursService
   ) {
     this.auth$ = this.store.select('auth');
+    this.panier$ = this.store.select('panier');
   }
 
   public disconnect(): void {
@@ -56,8 +61,6 @@ export class AppComponent {
   }
 
   public isAdmin(a: Auth): boolean {
-    console.log(a);
-    console.log(a.roles.includes(Role.GESTIONNAIRE));
     return a.roles.includes(Role.GESTIONNAIRE);
   }
 }

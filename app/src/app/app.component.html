@@ -31,6 +31,14 @@
           }
         </div>
       </ng-container>
+      <ng-container *ngrxLet="panier$; let p; let e = error; let c = complete">
+        <div class="shopping-cart">
+          <button mat-icon-button [routerLink]="'/panier'" matBadge="{{p.produits.length}}" matBadgePosition="below"
+            matBadgeOverlap matBadgeHidden="{{p.produits.length == 0}}" matBadgeColor="accent">
+            <mat-icon aria-hidden="false">shopping_cart</mat-icon>
+          </button>
+        </div>
+      </ng-container>
     </div>
   </div>
 </mat-toolbar>

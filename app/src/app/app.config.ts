@@ -1,4 +1,8 @@
-import { ApplicationConfig, importProvidersFrom } from '@angular/core';
+import {
+  ApplicationConfig,
+  importProvidersFrom,
+  isDevMode,
+} from '@angular/core';
 import { provideRouter } from '@angular/router';
 
 import { routes } from './app.routes';
@@ -13,6 +17,7 @@ import { authReducer } from './store/auth.reducers';
 import { AuthEffects } from './store/auth.effects';
 import { provideAnimationsAsync } from '@angular/platform-browser/animations/async';
 import { httpInterceptorProviders } from './interceptors/http-auth.interceptor';
+import { panierReducer } from './store/panier.reducers';
 
 export const appConfig: ApplicationConfig = {
   providers: [
@@ -20,7 +25,7 @@ export const appConfig: ApplicationConfig = {
     provideHttpClient(),
     importProvidersFrom(HttpClientModule),
     httpInterceptorProviders,
-    provideStore({ auth: authReducer }),
+    provideStore({ auth: authReducer, panier: panierReducer }),
     provideEffects([AuthEffects]),
     provideAnimationsAsync(),
   ],

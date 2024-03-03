@@ -5,19 +5,6 @@
   border-bottom: 1px solid black;
 }
 
-.navbar a,
-.navbar button {
-  padding: 12px 25px;
-  border-radius: 0;
-  transition: 0.25s ease;
-  min-width: 125px;
-}
-
-.navbar a,
-.navbar button {
-  color: black;
-}
-
 .navbar a:hover,
 .navbar button:hover,
 .navbar .active {
@@ -35,7 +22,8 @@
   justify-content: space-between;
 }
 
-.user-logged {
+.user-logged,
+.shopping-cart {
   display: inline-block;
 }
 
