@@ -1,3 +1,5 @@
+import { ProduitStockResponseDTO } from './ProduitsPaginerResponseDTO';
+
 export interface ProduitsGetResponseDTO {
   id: number;
   prix_unitaire: number;
@@ -6,9 +8,8 @@ export interface ProduitsGetResponseDTO {
   image_url: string;
   description: string;
   libelle: string;
-  couleurs: string[];
+  stock: ProduitStockResponseDTO[];
   categorie: {
     libelle: string;
   };
-  stock_restant: boolean;
 }

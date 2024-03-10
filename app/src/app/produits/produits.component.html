@@ -1,0 +1,19 @@
+<mat-card>
+	<mat-card-header>
+		<mat-card-title><a href="/produits/{{produit.id}}">{{produit.libelle}}</a></mat-card-title>
+		<mat-card-subtitle>{{produit.prix_unitaire}} €</mat-card-subtitle>
+	</mat-card-header>
+	<img mat-card-image src="{{produit.image_url}}">
+	<mat-card-content>
+		<p>{{produit.description}}</p>
+		<mat-selection-list [multiple]="false" (selectionChange)="selectedCouleur($event)">
+			@for (pstock of produit.stock; track pstock) {
+			<mat-list-option [selected]="pstock.couleur == stock.couleur"
+				[value]="pstock.couleur">{{pstock.couleur}}</mat-list-option>
+			}
+		</mat-selection-list>
+	</mat-card-content>
+	<mat-card-actions>
+		<app-ajouter-shop [id]="produit.id" [stock]="stock.quantite" [couleur]="stock.couleur" />
+	</mat-card-actions>
+</mat-card>

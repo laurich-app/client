@@ -19,7 +19,6 @@ export const initialState: Auth = previousState;
 export const authReducer = createReducer(
   initialState,
   on(login, (state: Auth, action: { token: Tokens }) => {
-    console.log(action);
     const decodedToken = jose.decodeJwt(action.token.accessToken);
     if (!isUtilisateursJWTPayload(decodedToken)) {
       throw new Error('Problème dans le JWT');
@@ -33,7 +32,6 @@ export const authReducer = createReducer(
       token: action.token,
       roles: rolesEnum,
     };
-    console.log(newState);
     localStorage.setItem('app', JSON.stringify(newState));
 
     // Si jamais une erreur survient

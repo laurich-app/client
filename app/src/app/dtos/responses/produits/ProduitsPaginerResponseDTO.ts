@@ -6,5 +6,10 @@ export interface ProduitsPaginerResponseDTO {
   image_url: string;
   description: string;
   libelle: string;
-  couleurs: string[];
+  stock: ProduitStockResponseDTO[];
+}
+
+export interface ProduitStockResponseDTO {
+  couleur: string;
+  quantite: number;
 }

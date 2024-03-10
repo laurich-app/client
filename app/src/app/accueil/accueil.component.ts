@@ -14,6 +14,11 @@ import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 import { MatCardModule } from '@angular/material/card';
 import { MatButtonModule } from '@angular/material/button';
 import { MatIconModule } from '@angular/material/icon';
+import { MatGridListModule } from '@angular/material/grid-list';
+import { CREATE_PANIER_EFFECTS } from '../store/panier.action';
+import { Store } from '@ngrx/store';
+import { Panier } from '../models/panier';
+import { ProduitsComponent } from '../produits/produits.component';
 
 @Component({
   selector: 'app-accueil',
@@ -21,9 +26,8 @@ import { MatIconModule } from '@angular/material/icon';
   imports: [
     MatPaginatorModule,
     MatProgressSpinnerModule,
-    MatCardModule,
-    MatButtonModule,
-    MatIconModule,
+    ProduitsComponent,
+    MatGridListModule,
   ],
   templateUrl: './accueil.component.html',
   styleUrl: './accueil.component.scss',
@@ -57,26 +61,12 @@ export class AccueilComponent implements OnInit {
   getData(page: number, pageSize: number) {
     this.isLoading = true;
     let form: PaginateRequestDTO = { page: page, limit: pageSize };
-    this.produits = [
-      {
-        id: 1,
-        prix_unitaire: 12.34,
-        sexe: 'M',
-        taille: 'S',
-        image_url:
-          'https://s1.qwant.com/thumbr/300x300/8/3/dc0489d0924ae49d8c2f9cf7e4121f6b774a56fd110df042705d0f07105680/th.jpg?u=https%3A%2F%2Ftse.mm.bing.net%2Fth%3Fid%3DOIF.A%252fn8FoHLgodzkCk%252fM59Cpg%26pid%3DApi&q=0&b=1&p=0&a=0',
-        description: "Un T shirt pour l'été",
-        libelle: 'T shirt',
-        couleurs: ['ROUGE', 'VERT'],
-      },
-    ];
-    // Uncomment when ready
-    // this.produitsService
-    //   .getAll(form)
-    //   .subscribe((p: PaginateResponseDTO<ProduitsPaginerResponseDTO>) => {
-    //     this.produits = p.data;
-    //     this.totalItems = p.pagination.nbItem;
-    //     this.isLoading = false;
-    //   });
+    this.produitsService
+      .getAll(form)
+      .subscribe((p: PaginateResponseDTO<ProduitsPaginerResponseDTO>) => {
+        this.produits = p.data;
+        this.totalItems = p.pagination.nbItem;
+        this.isLoading = false;
+      });
   }
 }

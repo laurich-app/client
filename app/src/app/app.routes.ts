@@ -9,11 +9,15 @@ import { GestionnaireGuard } from './guard/gestionnaire.guard';
 import { ProfileComponent } from './profile/profile.component';
 import { profileRoutes } from './profile/profile.routes';
 import { AuthGuard } from './guard/auth.guard';
+import { PanierComponent } from './panier/panier.component';
+import { IdComponent } from './produits/id/id.component';
 
 export const routes: Routes = [
   { path: '', component: AccueilComponent },
   { path: 'connexion', component: ConnexionComponent },
   { path: 'inscription', component: InscriptionComponent },
+  { path: 'panier', component: PanierComponent },
+  { path: 'produits/:id', component: IdComponent },
   {
     path: 'gestionnaire',
     component: GestionnaireComponent,

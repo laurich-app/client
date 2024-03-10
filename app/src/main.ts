@@ -14,8 +14,8 @@ async function enableMocking() {
   return worker.start();
 }
 
-enableMocking();
-
-bootstrapApplication(AppComponent, appConfig).catch((err) =>
-  console.error(err)
-);
+enableMocking().then(() => {
+  bootstrapApplication(AppComponent, appConfig).catch((err) =>
+    console.error(err)
+  );
+});

@@ -1,0 +1,13 @@
+<button [disabled]="quantite == 1" mat-icon-button matTooltip="Basic" aria-label="Décrémenter la quantité"
+	(click)="decrement()">
+	<mat-icon>remove</mat-icon>
+</button>
+{{quantite}}
+<button [disabled]="!canIncrement()" mat-icon-button matTooltip="Basic" aria-label="Incrémenter la quantité"
+	(click)="increment()">
+	<mat-icon>add</mat-icon>
+</button>
+<button [disabled]="stock <= 0" mat-icon-button matTooltip="Basic" aria-label="Ajouter un produit au panier"
+	(click)="ajouterPanier()">
+	<mat-icon>add_shopping_cart</mat-icon>
+</button>

@@ -49,10 +49,10 @@ export class AuthGuard implements CanActivate {
             );
           } catch (e) {
             this.store.dispatch(logout());
-            return of(this.router.parseUrl('/'));
+            return of(this.router.parseUrl('/connexion'));
           }
         }
-        return of(this.router.parseUrl('/'));
+        return of(this.router.parseUrl('/connexion'));
       })
     );
   }

@@ -1,6 +1,3 @@
-import { Produit } from './produit';
+import { PanierResponseDTO } from '../dtos/responses/paniers/PanierResponseDTO';
 
-export interface Panier {
-  token: string | null;
-  produits: Produit[];
-}
+export interface Panier extends PanierResponseDTO {}

@@ -13,7 +13,9 @@ const STORAGE_ITEM_NAME = 'PANIER';
 const storage = localStorage.getItem(STORAGE_ITEM_NAME);
 
 const emptyState: Panier = {
-  token: null,
+  token: '',
+  _id: '',
+  date_creation: new Date(),
   produits: [],
 };
 let previousState = emptyState;
@@ -27,13 +29,14 @@ export const initialState: Panier = previousState;
 export const panierReducer = createReducer(
   initialState,
   on(CREATE_PANIER, (state: Panier, action: { panier: Panier }) => {
+    console.log(action);
     localStorage.setItem(STORAGE_ITEM_NAME, JSON.stringify(action.panier));
     return JSON.parse(JSON.stringify(action.panier)) || state;
   }),
   on(ADD_PRODUIT, (state: Panier, action: { produit: Produit }) => {
     if (state.token == null) throw new Error("Le panier n'est pas initialisé");
     const newPanier: Panier = {
-      token: state.token,
+      ...state,
       produits: [...state.produits, action.produit],
     };
     localStorage.setItem(STORAGE_ITEM_NAME, JSON.stringify(newPanier));
@@ -41,34 +44,45 @@ export const panierReducer = createReducer(
   }),
   on(MODIFY_QUANTITE, (state: Panier, action: { update: ModifierProduit }) => {
     if (state.token == null) throw new Error("Le panier n'est pas initialisé");
-    const index = state.produits.findIndex((p) => p.id == action.update.id);
-    const produit = state.produits.find((p) => p.id == action.update.id);
+    const index = state.produits.findIndex(
+      (p) =>
+        p.id_produit_catalogue == action.update.id &&
+        p.couleurs.libelle == action.update.couleur_choisi
+    );
+    const produit = state.produits.find(
+      (p) =>
+        p.id_produit_catalogue == action.update.id &&
+        p.couleurs.libelle == action.update.couleur_choisi
+    );
     if (index == -1 || !produit) throw new Error('Produit introuvable');
 
     // Regénération d'un objet produit non binder à l'objet précédent
-    produit.quantite = action.update.quantite;
+    const p = JSON.parse(JSON.stringify(produit));
+    p.quantite = action.update.quantite;
     const produits = [
-      ...state.produits.slice(0, index - 1),
-      produit,
-      ...state.produits.slice(index, state.produits.length),
+      ...state.produits.slice(0, index),
+      p,
+      ...state.produits.slice(index + 1, state.produits.length),
     ];
 
     // Création du nouvel objet panier
     const newPanier: Panier = {
-      token: state.token,
+      ...state,
       produits,
     };
 
     // Sauvegarde local
     localStorage.setItem(STORAGE_ITEM_NAME, JSON.stringify(newPanier));
-    return state;
+    return newPanier || state;
   }),
   on(REMOVE_PRODUIT, (state: Panier, action: { id: number }) => {
     if (state.token == null) throw new Error("Le panier n'est pas initialisé");
-    const index = state.produits.findIndex((p) => p.id == action.id);
+    const index = state.produits.findIndex(
+      (p) => p.id_produit_catalogue == action.id
+    );
     if (index == -1) throw new Error('Produit introuvable');
     const newPanier: Panier = {
-      token: state.token,
+      ...state,
       produits: [
         ...state.produits.slice(0, index - 1),
         ...state.produits.slice(index, state.produits.length),

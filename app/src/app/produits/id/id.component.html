@@ -1,0 +1,35 @@
+<div class="content">
+	<div class="content-produits">
+		@if (loading) {
+		<ng-container>
+			<mat-spinner></mat-spinner>
+		</ng-container>
+		}
+
+		@if(!loading) {
+		<div class="left-content">
+			<dl>
+				<dt>ID</dt>
+				<dd>{{produit.id}}</dd>
+				<dt>Libelle</dt>
+				<dd>{{produit.libelle}}</dd>
+				<dt>Image</dt>
+				<dd><img mat-card-image src="{{produit.image_url}}"></dd>
+				<dt>Description</dt>
+				<dd>{{produit.description}}</dd>
+				<dt>Tailles</dt>
+				<dd>{{produit.taille}}</dd>
+			</dl>
+		</div>
+		<div class="right-content">
+			<mat-selection-list [multiple]="false" (selectionChange)="selectedCouleur($event)">
+				@for (pstock of produit.stock; track pstock) {
+				<mat-list-option [selected]="pstock.couleur == stock.couleur"
+					[value]="pstock.couleur">{{pstock.couleur}}</mat-list-option>
+				}
+			</mat-selection-list>
+			<app-ajouter-shop [id]="produit.id" [stock]="stock.quantite" [couleur]="stock.couleur" />
+		</div>
+		}
+	</div>
+</div>

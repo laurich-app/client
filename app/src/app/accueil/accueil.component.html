@@ -7,30 +7,13 @@
 		</ng-container>
 		}
 
-		@for (produit of produits;track $index) {
-		<mat-card>
-			<mat-card-header>
-				<mat-card-title>{{produit.libelle}}</mat-card-title>
-				<mat-card-subtitle>{{produit.prix_unitaire}} €</mat-card-subtitle>
-			</mat-card-header>
-			<img mat-card-image src="{{produit.image_url}}">
-			<mat-card-content>
-				<p>{{produit.description}}</p>
-			</mat-card-content>
-			<mat-card-actions>
-				<button mat-icon-button matTooltip="Basic" aria-label="Example icon-button with a heart icon">
-					<mat-icon>remove</mat-icon>
-				</button>
-				1
-				<button mat-icon-button matTooltip="Basic" aria-label="Example icon-button with a heart icon">
-					<mat-icon>add</mat-icon>
-				</button>
-				<button mat-icon-button matTooltip="Basic" aria-label="Example icon-button with a heart icon">
-					<mat-icon>add_shopping_cart</mat-icon>
-				</button>
-			</mat-card-actions>
-		</mat-card>
-		}
+		<mat-grid-list cols="2">
+			@for (produit of produits;track $index) {
+			<mat-grid-tile>
+				<app-produits [produit]="produit" />
+			</mat-grid-tile>
+			}
+		</mat-grid-list>
 		<mat-paginator [length]="totalItems" [pageSize]="pageSize" (page)="onPageChange($event)" hidePageSize
 			aria-label="Select page of periodic elements">
 		</mat-paginator>
