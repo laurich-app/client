@@ -5,26 +5,75 @@ import { Observable } from 'rxjs';
 import { Panier } from '../models/panier';
 import { LetDirective } from '@ngrx/component';
 import { MatButtonModule } from '@angular/material/button';
-import { REMOVE_PANIER_EFFECTS } from '../store/panier.action';
+import { REMOVE_PANIER_EFFECTS, VALIDER_PANIER } from '../store/panier.action';
 import { MatDividerModule } from '@angular/material/divider';
+import { Auth } from '../models/auth';
+import { Router } from '@angular/router';
+import { ProduitsService } from '../services/produits.service';
+import { PaniersService } from '../services/paniers.service';
+import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
+import { NOTIFICATION_CONDITION } from '../store/notification.action';
 
 @Component({
   selector: 'app-panier',
   standalone: true,
-  imports: [ItemShopComponent, LetDirective, MatButtonModule, MatDividerModule],
+  imports: [
+    ItemShopComponent,
+    LetDirective,
+    MatButtonModule,
+    MatDividerModule,
+    MatProgressSpinnerModule,
+  ],
   templateUrl: './panier.component.html',
   styleUrl: './panier.component.scss',
 })
 export class PanierComponent {
   panier$: Observable<Panier>;
+  auth$: Observable<Auth>;
+  loading: boolean = false;
 
-  constructor(private store: Store<{ panier: Panier }>) {
+  constructor(
+    private store: Store<{ panier: Panier; auth: Auth }>,
+    private router: Router,
+    private paniersService: PaniersService
+  ) {
     this.panier$ = this.store.select('panier');
+    this.auth$ = this.store.select('auth');
   }
 
   supprimerPanier() {
     this.store.dispatch(REMOVE_PANIER_EFFECTS());
   }
 
-  validerPanier() {}
+  validerPanier() {
+    this.auth$.subscribe({
+      next: (e) => {
+        if (!e.isLoggedIn) this.router.navigate(['/connexion']);
+        else {
+          this.panier$.subscribe({
+            next: (e) => {
+              this.submitPanier(e.token);
+            },
+          });
+        }
+      },
+    });
+  }
+
+  private submitPanier(token: string) {
+    if (this.loading) return;
+    this.loading = true;
+    this.paniersService.validerCommande(token).subscribe({
+      next: (e) => {
+        this.store.dispatch(VALIDER_PANIER());
+        this.store.dispatch(
+          NOTIFICATION_CONDITION({ message: 'Commande validée' })
+        );
+        this.loading = false;
+      },
+      error: (e) => {
+        this.loading = false;
+      },
+    });
+  }
 }

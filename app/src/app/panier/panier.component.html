@@ -1,3 +1,4 @@
+@if(!loading) {
 <div class="content">
 	<ng-container *ngrxLet="panier$; let p; let e = error; let c = complete">
 		@for(produit of p.produits; track produit) {
@@ -13,3 +14,9 @@
 		}
 	</ng-container>
 </div>
+}
+@if(loading) {
+<ng-container>
+	<mat-spinner></mat-spinner>
+</ng-container>
+}

@@ -137,6 +137,13 @@ const deleteProduitsPanierToken = http.delete(
   }
 );
 
+const validerPanier = http.post(
+  `${environment.API_URL}/paniers/:token/valider_commande`,
+  async ({ request, params, cookies }) => {
+    return HttpResponse.json();
+  }
+);
+
 export const paniers = [
   getPanierToken,
   postPanierToken,
@@ -144,4 +151,5 @@ export const paniers = [
   deletePanierToken,
   deleteProduitsPanierToken,
   putProduitsPanierToken,
+  validerPanier,
 ];

@@ -5,6 +5,7 @@ import {
   MODIFY_QUANTITE,
   REMOVE_PRODUIT,
   REMOVE_PANIER,
+  VALIDER_PANIER,
 } from './panier.action';
 import { Panier } from '../models/panier';
 import { ModifierProduit, Produit } from '../models/produit';
@@ -98,6 +99,10 @@ export const panierReducer = createReducer(
     }
   ),
   on(REMOVE_PANIER, () => {
+    localStorage.removeItem(STORAGE_ITEM_NAME);
+    return JSON.parse(JSON.stringify(emptyState));
+  }),
+  on(VALIDER_PANIER, () => {
     localStorage.removeItem(STORAGE_ITEM_NAME);
     return JSON.parse(JSON.stringify(emptyState));
   })

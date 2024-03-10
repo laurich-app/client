@@ -63,7 +63,7 @@ export class AppComponent implements OnInit {
     this.store.pipe(select('notification')).subscribe((event) => {
       if (event.message != null)
         this._snackBar.open(event.message, 'Ok', {
-          duration: 10 * 1000,
+          duration: 2.5 * 1000,
           horizontalPosition: 'left',
           verticalPosition: 'top',
         });

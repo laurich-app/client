@@ -12,7 +12,10 @@ export enum PanierActionTypes {
   PANIER_REMOVE_PRODUIT = 'Supprimer Produit Panier',
   PANIER_REMOVE_EFFECTS = 'Supprimer Panier Loading',
   PANIER_REMOVE = 'Supprimer Panier',
+  VALIDER_PANIER = 'Valider Panier',
 }
+
+export const VALIDER_PANIER = createAction(PanierActionTypes.VALIDER_PANIER);
 
 export const CREATE_PANIER_EFFECTS = createAction(
   PanierActionTypes.PANIER_CREATE_PANIER_EFFECTS,
@@ -63,4 +66,5 @@ export type PanierAction =
   | typeof REMOVE_PRODUIT
   | typeof REMOVE_PRODUIT_EFFECTS
   | typeof REMOVE_PANIER
-  | typeof REMOVE_PANIER_EFFECTS;
+  | typeof REMOVE_PANIER_EFFECTS
+  | typeof VALIDER_PANIER;
