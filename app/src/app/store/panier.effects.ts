@@ -24,6 +24,7 @@ import {
 } from './panier.action';
 import { CreerPanierRequestDTO } from '../dtos/requests/paniers/CreerPanierRequestDTO';
 import { AjouterProduit, ModifierProduit, Produit } from '../models/produit';
+import { NOTIFICATION_CONDITION } from './notification.action';
 
 @Injectable()
 export class PanierEffects {
@@ -56,6 +57,11 @@ export class PanierEffects {
                 })
                 .pipe(
                   map((panier) => {
+                    this.store.dispatch(
+                      NOTIFICATION_CONDITION({
+                        message: 'Le panier a été créé',
+                      })
+                    );
                     return CREATE_PANIER({
                       panier,
                     });
@@ -81,6 +87,11 @@ export class PanierEffects {
                     );
                     if (!product)
                       throw new Error("Le produit n'a pas été ajouté");
+                    this.store.dispatch(
+                      NOTIFICATION_CONDITION({
+                        message: 'Le produit a été ajouté',
+                      })
+                    );
                     return ADD_PRODUIT({
                       produit: product,
                     });
@@ -122,6 +133,11 @@ export class PanierEffects {
                   );
                   if (!produit)
                     throw new Error("Le produit n'existe plus dans le panier.");
+                  this.store.dispatch(
+                    NOTIFICATION_CONDITION({
+                      message: 'La quantité a été modifiée',
+                    })
+                  );
                   return MODIFY_QUANTITE({
                     update: {
                       id: produit.id_produit_catalogue,
@@ -146,7 +162,14 @@ export class PanierEffects {
           take(1),
           concatMap((p) => {
             return this.panierService.delete(p.token).pipe(
-              map(() => REMOVE_PANIER()),
+              map(() => {
+                this.store.dispatch(
+                  NOTIFICATION_CONDITION({
+                    message: 'Le panier a été supprimé',
+                  })
+                );
+                return REMOVE_PANIER();
+              }),
               catchError(() => EMPTY)
             );
           })
@@ -165,14 +188,28 @@ export class PanierEffects {
             // Si c'est le dernier élément on supprime le panier
             if (p.produits.length == 1) {
               return this.panierService.delete(p.token).pipe(
-                map(() => REMOVE_PANIER()),
+                map(() => {
+                  this.store.dispatch(
+                    NOTIFICATION_CONDITION({
+                      message: 'Le panier a été supprimé',
+                    })
+                  );
+                  return REMOVE_PANIER();
+                }),
                 catchError(() => EMPTY)
               );
             } else {
               return this.panierService
                 .supprimerProduit(p.token, id, couleur)
                 .pipe(
-                  map(() => REMOVE_PRODUIT({ id, couleur })),
+                  map(() => {
+                    this.store.dispatch(
+                      NOTIFICATION_CONDITION({
+                        message: 'Le produit a été supprimé',
+                      })
+                    );
+                    return REMOVE_PRODUIT({ id, couleur });
+                  }),
                   catchError(() => EMPTY)
                 );
             }

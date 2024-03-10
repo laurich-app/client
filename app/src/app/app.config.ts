@@ -19,6 +19,7 @@ import { provideAnimationsAsync } from '@angular/platform-browser/animations/asy
 import { httpInterceptorProviders } from './interceptors/http-auth.interceptor';
 import { panierReducer } from './store/panier.reducers';
 import { PanierEffects } from './store/panier.effects';
+import { notificationReducer } from './store/notification.reducers';
 
 export const appConfig: ApplicationConfig = {
   providers: [
@@ -26,7 +27,11 @@ export const appConfig: ApplicationConfig = {
     provideHttpClient(),
     importProvidersFrom(HttpClientModule),
     httpInterceptorProviders,
-    provideStore({ auth: authReducer, panier: panierReducer }),
+    provideStore({
+      auth: authReducer,
+      panier: panierReducer,
+      notification: notificationReducer,
+    }),
     provideEffects([AuthEffects, PanierEffects]),
     provideAnimationsAsync(),
   ],
