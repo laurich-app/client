@@ -1,6 +1,6 @@
 <mat-card>
 	<mat-card-header>
-		<mat-card-title><a href="/produits/{{produit.id}}">{{produit.libelle}}</a></mat-card-title>
+		<mat-card-title><a routerLink="/produits/{{produit.id}}">{{produit.libelle}}</a></mat-card-title>
 		<mat-card-subtitle>{{produit.prix_unitaire}} €</mat-card-subtitle>
 	</mat-card-header>
 	<img mat-card-image src="{{produit.image_url}}">

@@ -8,7 +8,9 @@ export enum PanierActionTypes {
   PANIER_ADD_PRODUIT = 'Ajouter Produit Panier',
   PANIER_MODIFY_QUANTITE_EFFECTS = 'Modifier Quantite Produit Panier Loading',
   PANIER_MODIFY_QUANTITE = 'Modifier Quantite Produit Panier',
+  PANIER_REMOVE_PRODUIT_EFFECTS = 'Supprimer Produit Panier Loading',
   PANIER_REMOVE_PRODUIT = 'Supprimer Produit Panier',
+  PANIER_REMOVE_EFFECTS = 'Supprimer Panier Loading',
   PANIER_REMOVE = 'Supprimer Panier',
 }
 
@@ -36,9 +38,18 @@ export const MODIFY_QUANTITE = createAction(
   props<{ update: ModifierProduit }>()
 );
 
+export const REMOVE_PRODUIT_EFFECTS = createAction(
+  PanierActionTypes.PANIER_REMOVE_PRODUIT_EFFECTS,
+  props<{ id: number; couleur: string }>()
+);
+
 export const REMOVE_PRODUIT = createAction(
   PanierActionTypes.PANIER_REMOVE_PRODUIT,
-  props<{ id: number }>()
+  props<{ id: number; couleur: string }>()
+);
+
+export const REMOVE_PANIER_EFFECTS = createAction(
+  PanierActionTypes.PANIER_REMOVE_EFFECTS
 );
 
 export const REMOVE_PANIER = createAction(PanierActionTypes.PANIER_REMOVE);
@@ -50,4 +61,6 @@ export type PanierAction =
   | typeof MODIFY_QUANTITE
   | typeof MODIFY_QUANTITE_EFFECTS
   | typeof REMOVE_PRODUIT
-  | typeof REMOVE_PANIER;
+  | typeof REMOVE_PRODUIT_EFFECTS
+  | typeof REMOVE_PANIER
+  | typeof REMOVE_PANIER_EFFECTS;

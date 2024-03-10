@@ -75,11 +75,22 @@ export class PaniersService {
    * Supprime un produit d'un panier spécifique.
    * @param token
    * @param id_produit
+   * @param couleur
    * @returns
    */
-  public supprimerProduit(token: string, id_produit: number): Observable<void> {
+  public supprimerProduit(
+    token: string,
+    id_produit: number,
+    couleur: string
+  ): Observable<void> {
     return this.http.delete<void>(
-      URI_PANIERS + '/' + token + '/produits/' + id_produit
+      URI_PANIERS +
+        '/' +
+        token +
+        '/produits/' +
+        id_produit +
+        '/couleurs/' +
+        couleur
     );
   }
 }

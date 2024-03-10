@@ -75,22 +75,28 @@ export const panierReducer = createReducer(
     localStorage.setItem(STORAGE_ITEM_NAME, JSON.stringify(newPanier));
     return newPanier || state;
   }),
-  on(REMOVE_PRODUIT, (state: Panier, action: { id: number }) => {
-    if (state.token == null) throw new Error("Le panier n'est pas initialisé");
-    const index = state.produits.findIndex(
-      (p) => p.id_produit_catalogue == action.id
-    );
-    if (index == -1) throw new Error('Produit introuvable');
-    const newPanier: Panier = {
-      ...state,
-      produits: [
-        ...state.produits.slice(0, index - 1),
-        ...state.produits.slice(index, state.produits.length),
-      ],
-    };
-    localStorage.setItem(STORAGE_ITEM_NAME, JSON.stringify(newPanier));
-    return state;
-  }),
+  on(
+    REMOVE_PRODUIT,
+    (state: Panier, action: { id: number; couleur: string }) => {
+      if (state.token == null)
+        throw new Error("Le panier n'est pas initialisé");
+      const index = state.produits.findIndex(
+        (p) =>
+          p.id_produit_catalogue == action.id &&
+          p.couleurs.libelle == action.couleur
+      );
+      if (index == -1) throw new Error('Produit introuvable');
+      const newPanier: Panier = {
+        ...state,
+        produits: [
+          ...state.produits.slice(0, index),
+          ...state.produits.slice(index + 1, state.produits.length),
+        ],
+      };
+      localStorage.setItem(STORAGE_ITEM_NAME, JSON.stringify(newPanier));
+      return newPanier || state;
+    }
+  ),
   on(REMOVE_PANIER, () => {
     localStorage.removeItem(STORAGE_ITEM_NAME);
     return JSON.parse(JSON.stringify(emptyState));

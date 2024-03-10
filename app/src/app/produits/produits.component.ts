@@ -13,6 +13,7 @@ import { Store } from '@ngrx/store';
 import { Panier } from '../models/panier';
 import { AjouterShopComponent } from '../panier/ajouter-shop/ajouter-shop.component';
 import { MatListModule, MatSelectionListChange } from '@angular/material/list';
+import { RouterModule } from '@angular/router';
 
 @Component({
   selector: 'app-produits',
@@ -23,6 +24,7 @@ import { MatListModule, MatSelectionListChange } from '@angular/material/list';
     MatIconModule,
     AjouterShopComponent,
     MatListModule,
+    RouterModule,
   ],
   templateUrl: './produits.component.html',
   styleUrl: './produits.component.scss',

@@ -19,6 +19,8 @@ import {
   CREATE_PANIER,
   MODIFY_QUANTITE,
   PanierActionTypes,
+  REMOVE_PANIER,
+  REMOVE_PRODUIT,
 } from './panier.action';
 import { CreerPanierRequestDTO } from '../dtos/requests/paniers/CreerPanierRequestDTO';
 import { AjouterProduit, ModifierProduit, Produit } from '../models/produit';
@@ -133,6 +135,50 @@ export class PanierEffects {
           })
         );
       })
+    )
+  );
+
+  supprimerPanier$ = createEffect(() =>
+    this.actions$.pipe(
+      ofType(PanierActionTypes.PANIER_REMOVE_EFFECTS),
+      exhaustMap(() => {
+        return this.state$.pipe(
+          take(1),
+          concatMap((p) => {
+            return this.panierService.delete(p.token).pipe(
+              map(() => REMOVE_PANIER()),
+              catchError(() => EMPTY)
+            );
+          })
+        );
+      })
+    )
+  );
+
+  supprimerProduit$ = createEffect(() =>
+    this.actions$.pipe(
+      ofType(PanierActionTypes.PANIER_REMOVE_PRODUIT_EFFECTS),
+      exhaustMap(({ id, couleur }) =>
+        this.state$.pipe(
+          take(1),
+          concatMap((p) => {
+            // Si c'est le dernier élément on supprime le panier
+            if (p.produits.length == 1) {
+              return this.panierService.delete(p.token).pipe(
+                map(() => REMOVE_PANIER()),
+                catchError(() => EMPTY)
+              );
+            } else {
+              return this.panierService
+                .supprimerProduit(p.token, id, couleur)
+                .pipe(
+                  map(() => REMOVE_PRODUIT({ id, couleur })),
+                  catchError(() => EMPTY)
+                );
+            }
+          })
+        )
+      )
     )
   );
 }

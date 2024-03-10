@@ -115,20 +115,22 @@ const putProduitsPanierToken = http.put(
 );
 
 const deleteProduitsPanierToken = http.delete(
-  `${environment.API_URL}/paniers/:token/produits/:id`,
+  `${environment.API_URL}/paniers/:token/produits/:id/couleurs/:couleur`,
   ({ request, params, cookies }) => {
     const response = dataPaniers.get(params['token'].toString());
     const id = params['id'].toString();
-    if (!response || !id)
+    const couleur = params['couleur'];
+    if (!response || !id || !couleur)
       return new HttpResponse(null, {
         status: 404,
       });
     const index = response.produits.findIndex(
-      (p) => p.id_produit_catalogue == Number(id)
+      (p) =>
+        p.id_produit_catalogue == Number(id) && p.couleurs.libelle == couleur
     );
     response.produits = [
-      ...response.produits.slice(0, index - 1),
-      ...response.produits.slice(index, response.produits.length),
+      ...response.produits.slice(0, index),
+      ...response.produits.slice(index + 1, response.produits.length),
     ];
     dataPaniers.set(response.token, response);
     return HttpResponse.json();

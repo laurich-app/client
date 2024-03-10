@@ -1,1 +1,15 @@
-<p>panier works!</p>
+<div class="content">
+	<ng-container *ngrxLet="panier$; let p; let e = error; let c = complete">
+		@for(produit of p.produits; track produit) {
+		<app-item-shop [produit]="produit" />
+		<mat-divider></mat-divider>
+		}
+		@if(p.produits.length == 0){
+		<p>Aucun article dans votre panier</p>
+		}
+		@if(p.produits.length > 0){
+		<button mat-list-item mat-button color="primary" (click)="validerPanier()">Valider votre panier</button>
+		<button mat-list-item mat-button color="warn" (click)="supprimerPanier()">Supprimer votre panier</button>
+		}
+	</ng-container>
+</div>

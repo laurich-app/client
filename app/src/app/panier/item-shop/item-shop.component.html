@@ -1,0 +1,12 @@
+@if(!loading) {
+<div class="produit-item">
+	<div class="produit-image">
+		<img mat-card-image src="{{catalogueProduit.image_url}}" />
+	</div>
+	<div class="produit-content">
+		<h2><a routerLink="/produits/{{catalogueProduit.id}}">{{catalogueProduit.libelle}}</a></h2>
+	</div>
+	<app-modifier-shop [panierProduit]="panierProduit" [catalogueProduit]="catalogueProduit" />
+	<app-supprimer-item-shop [couleur]="panierProduit.couleurs.libelle" [id]="catalogueProduit.id" />
+</div>
+}
