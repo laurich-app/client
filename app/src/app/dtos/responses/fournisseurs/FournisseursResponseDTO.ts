@@ -1,7 +1,7 @@
 import { ProduitsFournisseursResponseDTO } from './ProduitsFournisseursResponseDTO';
 
 export interface FournisseursResponseDTO {
-  _id: string;
+  id: string;
   email: string;
   raison_sociale: string;
   produits: ProduitsFournisseursResponseDTO[];
