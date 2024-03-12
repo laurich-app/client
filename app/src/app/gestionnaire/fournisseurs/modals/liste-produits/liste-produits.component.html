@@ -1,0 +1,46 @@
+<h2 mat-dialog-title>Choisir les produits</h2>
+<mat-dialog-content>
+	@if (isLoading) {
+	<ng-container>
+		<mat-spinner></mat-spinner>
+	</ng-container>
+	}
+	<div>
+		<table mat-table [dataSource]="produitsPaginer" class="mat-elevation-z8">
+			<ng-container matColumnDef="id">
+				<th mat-header-cell *matHeaderCellDef>id</th>
+				<td mat-cell *matCellDef="let element">{{ element.id }}</td>
+			</ng-container>
+
+			<ng-container matColumnDef="libelle">
+				<th mat-header-cell *matHeaderCellDef>Libelle</th>
+				<td mat-cell *matCellDef="let element">{{ element.libelle }}</td>
+			</ng-container>
+
+			<ng-container matColumnDef="prix_unitaire">
+				<th mat-header-cell *matHeaderCellDef>Prix</th>
+				<td mat-cell *matCellDef="let element">{{ element.prix_unitaire }} €</td>
+			</ng-container>
+
+			<ng-container matColumnDef="actions">
+				<th mat-header-cell *matHeaderCellDef>Actions</th>
+				<td mat-cell *matCellDef="let element">
+					<mat-checkbox [checked]="isContained(element)" (change)="onChangeElement(element)">
+
+					</mat-checkbox>
+				</td>
+			</ng-container>
+
+			<tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+			<tr mat-row *matRowDef="let row; columns: displayedColumns"></tr>
+		</table>
+
+		<mat-paginator [length]="totalItems" [pageSize]="pageSize" (page)="onPageChange($event)" hidePageSize
+			aria-label="Select page of periodic elements">
+		</mat-paginator>
+	</div>
+</mat-dialog-content>
+<mat-dialog-actions>
+	<button mat-button color="warn" (click)="onNoClick()">Annulée</button>
+	<button mat-button color="primary" [mat-dialog-close]="data" cdkFocusInitial>Ok</button>
+</mat-dialog-actions>
