@@ -56,7 +56,7 @@ export class BonDeCommandesComponent implements OnInit {
 
   getData(page: number, pageSize: number) {
     this.isLoading = true;
-    let form: PaginateRequestDTO = { page: page, limit: pageSize };
+    let form: PaginateRequestDTO = { page: page + 1, limit: pageSize };
     this.bonDeCommandesService
       .getAll(form)
       .subscribe((p: PaginateResponseDTO<BonCommandesResponseDTO>) => {
@@ -68,7 +68,7 @@ export class BonDeCommandesComponent implements OnInit {
 
   ngOnInit(): void {
     this.pageSize = 5;
-    this.currentPage = 1;
+    this.currentPage = 0;
     this.totalItems = 0;
     this.getData(this.currentPage, this.pageSize);
   }

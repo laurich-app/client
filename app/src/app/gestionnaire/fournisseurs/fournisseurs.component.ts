@@ -52,7 +52,7 @@ export class FournisseursComponent {
 
   getData(page: number, pageSize: number) {
     this.isLoading = true;
-    let form: PaginateRequestDTO = { page: page, limit: pageSize };
+    let form: PaginateRequestDTO = { page: page + 1, limit: pageSize };
     this.fournisseursService
       .getAll(form)
       .subscribe((p: PaginateResponseDTO<FournisseursResponseDTO>) => {
@@ -64,7 +64,7 @@ export class FournisseursComponent {
 
   ngOnInit(): void {
     this.pageSize = 5;
-    this.currentPage = 1;
+    this.currentPage = 0;
     this.totalItems = 0;
     this.getData(this.currentPage, this.pageSize);
   }
