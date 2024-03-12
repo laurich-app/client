@@ -11,6 +11,7 @@ import { MatButtonModule } from '@angular/material/button';
 import { MatIconModule } from '@angular/material/icon';
 import { Observable, exhaustMap, of, take } from 'rxjs';
 import { PanierProduitResponseDTO } from '../../dtos/responses/paniers/PanierResponseDTO';
+import { Couleurs } from '../../enums/couleurs.enum';
 
 @Component({
   selector: 'app-ajouter-shop',
@@ -21,7 +22,7 @@ import { PanierProduitResponseDTO } from '../../dtos/responses/paniers/PanierRes
 })
 export class AjouterShopComponent implements OnChanges {
   @Input({ required: true, alias: 'id' }) id!: number;
-  @Input({ required: true, alias: 'couleur' }) couleur!: string;
+  @Input({ required: true, alias: 'couleur' }) couleur!: Couleurs;
   @Input({ required: true, alias: 'stock' }) stock!: number;
   quantite: number = 1;
   found: PanierProduitResponseDTO | undefined;

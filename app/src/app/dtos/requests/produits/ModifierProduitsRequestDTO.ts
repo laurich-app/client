@@ -5,6 +5,5 @@ export interface ModifierProduitsRequestDTO {
   image_url?: string;
   description?: string;
   libelle?: string;
-  couleurs?: string[];
   categorie_id?: number;
 }

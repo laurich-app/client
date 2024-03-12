@@ -1,1 +1,52 @@
-<p>categories works!</p>
+<div>
+	<h1>Liste des catégories :</h1>
+	@if (isLoading) {
+	<ng-container>
+		<mat-spinner></mat-spinner>
+	</ng-container>
+	}
+	<div class="actions">
+		<button mat-button color="primary" routerLink="/gestionnaire/categories/ajouter" matTooltip="Basic"
+			aria-label="Ajouter une catégorie">
+			Ajouter une catégorie
+		</button>
+	</div>
+	<div>
+		<table mat-table [dataSource]="categories" class="mat-elevation-z8">
+			<ng-container matColumnDef="id">
+				<th mat-header-cell *matHeaderCellDef>id</th>
+				<td mat-cell *matCellDef="let element">{{ element.id }}</td>
+			</ng-container>
+
+			<ng-container matColumnDef="libelle">
+				<th mat-header-cell *matHeaderCellDef>Libelle</th>
+				<td mat-cell *matCellDef="let element">{{ element.libelle }}</td>
+			</ng-container>
+
+			<ng-container matColumnDef="nb_produits">
+				<th mat-header-cell *matHeaderCellDef>Nb produits</th>
+				<td mat-cell *matCellDef="let element">{{ element.nb_produits }}</td>
+			</ng-container>
+
+			<ng-container matColumnDef="actions">
+				<th mat-header-cell *matHeaderCellDef>Actions</th>
+				<td mat-cell *matCellDef="let element">
+					<button mat-icon-button routerLink="/gestionnaire/categories/{{element.id}}">
+						<mat-icon>visibility</mat-icon>
+					</button>
+					<button mat-icon-button routerLink="/gestionnaire/categories/{{element.id}}/modifier">
+						<mat-icon>update</mat-icon>
+					</button>
+					<app-supprimer-categories [categorie]="element" (isSupprimer)="reload()" />
+				</td>
+			</ng-container>
+
+			<tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+			<tr mat-row *matRowDef="let row; columns: displayedColumns"></tr>
+		</table>
+
+		<mat-paginator [length]="totalItems" [pageSize]="pageSize" (page)="onPageChange($event)" hidePageSize
+			aria-label="Select page of periodic elements">
+		</mat-paginator>
+	</div>
+</div>

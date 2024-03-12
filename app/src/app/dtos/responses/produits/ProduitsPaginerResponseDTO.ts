@@ -1,3 +1,5 @@
+import { Couleurs } from '../../../enums/couleurs.enum';
+
 export interface ProduitsPaginerResponseDTO {
   id: number;
   prix_unitaire: number;
@@ -10,6 +12,6 @@ export interface ProduitsPaginerResponseDTO {
 }
 
 export interface ProduitStockResponseDTO {
-  couleur: string;
+  couleur: Couleurs;
   quantite: number;
 }

@@ -7,11 +7,16 @@ import {
 import { Observable } from 'rxjs';
 import { PaginateRequestDTO } from '../dtos/requests/PaginateRequestDTO';
 import { PaginateResponseDTO } from '../dtos/responses/PaginateResponseDTO';
-import { ProduitsPaginerResponseDTO } from '../dtos/responses/produits/ProduitsPaginerResponseDTO';
+import {
+  ProduitStockResponseDTO,
+  ProduitsPaginerResponseDTO,
+} from '../dtos/responses/produits/ProduitsPaginerResponseDTO';
 import { URI_PRODUITS } from '../utils/constants';
 import { ProduitsGetResponseDTO } from '../dtos/responses/produits/ProduitsGetResponseDTO';
 import { CreerProduitsRequestDTO } from '../dtos/requests/produits/CreerProduitsRequestDTO';
 import { ModifierProduitsRequestDTO } from '../dtos/requests/produits/ModifierProduitsRequestDTO';
+import { AjouterStockDTO } from '../dtos/requests/produits/stocks/AjouterStockDTO';
+import { Couleurs } from '../enums/couleurs.enum';
 
 @Injectable({
   providedIn: 'root',
@@ -53,5 +58,21 @@ export class ProduitsService {
 
   public delete(id: number): Observable<void> {
     return this.http.delete<void>(URI_PRODUITS + '/' + id);
+  }
+
+  public addStock(
+    i: AjouterStockDTO,
+    id: number
+  ): Observable<ProduitStockResponseDTO> {
+    return this.http.post<ProduitStockResponseDTO>(
+      URI_PRODUITS + '/' + id + '/couleurs',
+      i
+    );
+  }
+
+  public removeStock(couleur: Couleurs, id: number): Observable<void> {
+    return this.http.delete<void>(
+      URI_PRODUITS + '/' + id + '/couleurs/' + couleur
+    );
   }
 }

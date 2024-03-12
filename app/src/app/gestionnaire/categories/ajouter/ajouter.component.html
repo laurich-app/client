@@ -1,0 +1,24 @@
+<form (ngSubmit)="submitForm()">
+	@if (errors && getObjectKeys(errors).length) {
+	<div class="error">
+		<ul>
+			@for (property of getObjectKeys(errors); track property) {
+			<li>{{property}}: {{errors[property]}}</li>
+			}
+		</ul>
+	</div>
+	}
+	<div>
+		<mat-form-field appearance="fill">
+			<mat-label for="libelle">Libelle :</mat-label>
+			<input matInput type="text" id="libelle" name="libelle" [(ngModel)]="formData.libelle" required>
+		</mat-form-field>
+	</div>
+	<div>
+		<button mat-button color="secondary" type="submit"
+			[disabled]="loading || (formData.libelle.length == 0)">Submit</button>
+		@if (loading) {
+		<span>Loading...</span>
+		}
+	</div>
+</form>

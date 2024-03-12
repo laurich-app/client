@@ -1,3 +1,5 @@
+import { Couleurs } from '../../../enums/couleurs.enum';
+
 export interface CreerProduitsRequestDTO {
   prix_unitaire: number;
   sexe: string;
@@ -5,6 +7,6 @@ export interface CreerProduitsRequestDTO {
   image_url: string;
   description: string;
   libelle: string;
-  couleurs: string[];
+  couleurs: Couleurs[];
   categorie_id: number;
 }
