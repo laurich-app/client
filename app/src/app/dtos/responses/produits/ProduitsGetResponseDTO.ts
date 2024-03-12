@@ -10,6 +10,7 @@ export interface ProduitsGetResponseDTO {
   libelle: string;
   stock: ProduitStockResponseDTO[];
   categorie: {
+    id: number;
     libelle: string;
   };
 }

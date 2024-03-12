@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
-import { BonCommandesResponseDTO } from '../../../dtos/responses/bon_de_commandes/BonCommandesResponseDTO';
+import { ProduitsGetResponseDTO } from '../../../dtos/responses/produits/ProduitsGetResponseDTO';
+import { ProduitsService } from '../../../services/produits.service';
 import { ActivatedRoute } from '@angular/router';
-import { BonDeCommandesService } from '../../../services/bon-de-commandes.service';
 
 @Component({
   selector: 'app-id',
@@ -11,24 +11,24 @@ import { BonDeCommandesService } from '../../../services/bon-de-commandes.servic
   styleUrl: './id.component.scss',
 })
 export class IdComponent implements OnInit {
-  id!: string;
-  bon_de_commande!: BonCommandesResponseDTO;
+  id!: number;
+  produit!: ProduitsGetResponseDTO;
   loading: boolean = true;
 
   constructor(
     private route: ActivatedRoute,
-    private bonDeCommandesService: BonDeCommandesService
+    private produitsService: ProduitsService
   ) {}
 
   ngOnInit(): void {
     const routeId = this.route.snapshot.paramMap.get('id');
-    if (routeId) {
-      this.id = routeId;
+    if (routeId && Number(routeId)) {
+      this.id = Number(routeId);
 
       this.loading = true;
-      this.bonDeCommandesService.get(this.id).subscribe({
+      this.produitsService.getOne(this.id).subscribe({
         next: (e) => {
-          this.bon_de_commande = e;
+          this.produit = e;
           this.loading = false;
         },
         error: () => {

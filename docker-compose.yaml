@@ -87,7 +87,7 @@ services:
       - POSTGRES_PASSWORD=pswd
 
   service-catalogue:
-    image: ghcr.io/laurich-app/service-produits:1.0.1
+    image: ghcr.io/laurich-app/service-produits:1.0.2
     environment:
       - URL_CONFIG_SERVEUR=http://serveur-conf:8888
       - CONSUL_HOST=discovery

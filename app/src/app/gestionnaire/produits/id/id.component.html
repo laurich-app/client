@@ -1,0 +1,20 @@
+@if(produit) {
+<dl>
+	<dt>ID</dt>
+	<dd>{{produit.id}}</dd>
+
+	<dt>libelle</dt>
+	<dd>{{produit.libelle}}</dd>
+
+	@if(produit.categorie){
+	<dt>catégorie</dt>
+	<dd>{{produit.categorie.libelle}}</dd>
+	}
+
+	<dt>couleurs : </dt>
+	@for(stock of produit.stock; track stock){
+	<dt>{{stock.couleur}}</dt>
+	<dd>{{stock.quantite}}</dd>
+	}
+</dl>
+}

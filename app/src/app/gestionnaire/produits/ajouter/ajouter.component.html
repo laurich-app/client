@@ -1,0 +1,70 @@
+<form (ngSubmit)="submitForm()">
+	@if (errors && getObjectKeys(errors).length) {
+	<div class="error">
+		<ul>
+			@for (property of getObjectKeys(errors); track property) {
+			<li>{{property}}: {{errors[property]}}</li>
+			}
+		</ul>
+	</div>
+	}
+	<div>
+		<mat-form-field appearance="fill">
+			<mat-label for="libelle">Libelle :</mat-label>
+			<input matInput type="text" id="libelle" name="libelle" [(ngModel)]="formData.libelle" required>
+		</mat-form-field>
+		<mat-form-field appearance="fill">
+			<mat-label for="prix_unitaire">Prix unitaire :</mat-label>
+			<input matInput min="1" type="number" step="0.01" id="prix_unitaire" name="prix_unitaire"
+				[(ngModel)]="formData.prix_unitaire" required>
+		</mat-form-field>
+		<mat-form-field>
+			<mat-label for="sexe">Sexe</mat-label>
+			<mat-select [(value)]="formData.sexe" (selectionChange)="onSexeSelectionChange($event)" name="sexe" id="sexe"
+				required>
+				@for (sexe of sexes; track sexe) {
+				<mat-option [value]="sexe">{{sexe}}</mat-option>
+				}
+			</mat-select>
+		</mat-form-field>
+		<mat-form-field>
+			<mat-label for="taille">Taille</mat-label>
+			<mat-select [(value)]="formData.taille" (selectionChange)="onTailleSelectionChange($event)" name="sexe" id="sexe"
+				required>
+				@for (taille of tailles; track taille) {
+				<mat-option [value]="taille">{{taille}}</mat-option>
+				}
+			</mat-select>
+		</mat-form-field>
+
+		<mat-form-field>
+			<mat-label for="couleurs">Couleurs</mat-label>
+			<mat-select multiple [(value)]="formData.couleurs" (selectionChange)="onCouleursSelectionChange($event)"
+				name="couleurs" id="couleurs" required>
+				@for (couleur of couleurs; track couleur) {
+				<mat-option [value]="couleur">{{couleur}}</mat-option>
+				}
+			</mat-select>
+		</mat-form-field>
+		<mat-form-field appearance="fill">
+			<mat-label for="image_url">URL de l'Image :</mat-label>
+			<input matInput type="text" id="image_url" name="image_url" [(ngModel)]="formData.image_url" required>
+		</mat-form-field>
+		<mat-form-field appearance="fill">
+			<mat-label for="description">Description :</mat-label>
+			<input matInput type="text" id="description" name="description" [(ngModel)]="formData.description">
+		</mat-form-field>
+		<mat-form-field appearance="fill">
+			<mat-label for="categorie_id">ID de la catégorie :</mat-label>
+			<input matInput min="1" type="number" id="categorie_id" name="categorie_id" [(ngModel)]="formData.categorie_id"
+				required>
+		</mat-form-field>
+	</div>
+	<div>
+		<button mat-button color="secondary" type="submit"
+			[disabled]="loading || (formData.categorie_id == 0 || formData.libelle.length == 0 || formData.prix_unitaire == 0 || formData.image_url.length == 0)">Submit</button>
+		@if (loading) {
+		<span>Loading...</span>
+		}
+	</div>
+</form>

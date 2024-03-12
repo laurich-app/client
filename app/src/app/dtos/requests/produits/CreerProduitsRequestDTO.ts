@@ -1,9 +1,11 @@
 import { Couleurs } from '../../../enums/couleurs.enum';
+import { Sexe } from '../../../enums/sexe.enum';
+import { Taille } from '../../../enums/taille.enum';
 
 export interface CreerProduitsRequestDTO {
   prix_unitaire: number;
-  sexe: string;
-  taille: string;
+  sexe: Sexe;
+  taille: Taille;
   image_url: string;
   description: string;
   libelle: string;

@@ -10,9 +10,20 @@ import { CategoriesComponent } from './categories/categories.component';
 import { AjouterComponent as AjouterCategorieComponent } from './categories/ajouter/ajouter.component';
 import { ModifierComponent as ModifierCategorieComponent } from './categories/id/modifier/modifier.component';
 import { IdComponent as IDCategorieComponent } from './categories/id/id.component';
+import { ProduitsComponent } from './produits/produits.component';
+import { AjouterComponent as AjouterProduitsComponent } from './produits/ajouter/ajouter.component';
+import { ModifierComponent as ModifierProduitsComponent } from './produits/id/modifier/modifier.component';
+import { IdComponent as IDProduitsComponent } from './produits/id/id.component';
 
 export const gestionnaireRoutes: Routes = [
   { path: 'utilisateurs', component: UtilisateursComponent },
+  { path: 'produits', component: ProduitsComponent },
+  { path: 'produits/ajouter', component: AjouterProduitsComponent },
+  {
+    path: 'produits/:id/modifier',
+    component: ModifierProduitsComponent,
+  },
+  { path: 'produits/:id', component: IDProduitsComponent },
   { path: 'categories', component: CategoriesComponent },
   { path: 'categories/ajouter', component: AjouterCategorieComponent },
   {

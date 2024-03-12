@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { FournisseursResponseDTO } from '../../../dtos/responses/fournisseurs/FournisseursResponseDTO';
 import { FournisseursService } from '../../../services/fournisseurs.service';
 import { ActivatedRoute } from '@angular/router';
@@ -10,7 +10,7 @@ import { ActivatedRoute } from '@angular/router';
   templateUrl: './id.component.html',
   styleUrl: './id.component.scss',
 })
-export class IdComponent {
+export class IdComponent implements OnInit {
   id!: string;
   fournisseur!: FournisseursResponseDTO;
   loading: boolean = true;

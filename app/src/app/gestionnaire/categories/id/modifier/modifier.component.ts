@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { ModifierCategoriesRequestDTO } from '../../../../dtos/requests/categories/ModifierCategoriesRequestDTO';
 import { CategoriesResponseDTO } from '../../../../dtos/responses/categories/CategoriesResponseDTO';
 import { CategoriesService } from '../../../../services/categories.service';
@@ -27,7 +27,7 @@ import { MatListModule } from '@angular/material/list';
   templateUrl: './modifier.component.html',
   styleUrl: './modifier.component.scss',
 })
-export class ModifierComponent {
+export class ModifierComponent implements OnInit {
   errors: Error = {};
   formData: ModifierCategoriesRequestDTO = {
     libelle: '',

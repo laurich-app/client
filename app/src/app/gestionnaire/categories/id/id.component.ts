@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { CategoriesResponseDTO } from '../../../dtos/responses/categories/CategoriesResponseDTO';
 import { CategoriesService } from '../../../services/categories.service';
 import { ActivatedRoute } from '@angular/router';
@@ -10,7 +10,7 @@ import { ActivatedRoute } from '@angular/router';
   templateUrl: './id.component.html',
   styleUrl: './id.component.scss',
 })
-export class IdComponent {
+export class IdComponent implements OnInit {
   id!: number;
   categorie!: CategoriesResponseDTO;
   loading: boolean = true;
