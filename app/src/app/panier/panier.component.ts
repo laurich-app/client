@@ -65,6 +65,7 @@ export class PanierComponent {
     this.loading = true;
     this.paniersService.validerCommande(token).subscribe({
       next: (e) => {
+        console.log('Panier validé !');
         this.store.dispatch(VALIDER_PANIER());
         this.store.dispatch(
           NOTIFICATION_CONDITION({ message: 'Commande validée' })
@@ -72,6 +73,7 @@ export class PanierComponent {
         this.loading = false;
       },
       error: (e) => {
+        console.log(e);
         this.loading = false;
       },
     });

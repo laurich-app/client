@@ -13,4 +13,16 @@ export interface CommandeResponseDTO {
   numero: string;
 }
 
-export interface CommandeProduitResponseDTO {}
+export interface CommandeProduitResponseDTO {
+  prix_unitaire: number;
+  sexe: string;
+  taille: string;
+  description: string;
+  couleur: {
+    libelle: string;
+  };
+  quantite: number;
+  categorie: {
+    libelle: string;
+  };
+}

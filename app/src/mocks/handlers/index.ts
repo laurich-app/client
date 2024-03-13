@@ -1,3 +1,5 @@
 import { paniers } from './panier';
 
-export const handlers = [...paniers];
+export const handlers = [
+  // ...paniers
+];

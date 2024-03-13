@@ -52,7 +52,7 @@ export class CommandesService {
     i: LivraisonRequestDTO
   ): Observable<CommandeResponseDTO> {
     return this.http.put<CommandeResponseDTO>(
-      URI_GESTIONNAIRES_COMMANDES + '/' + id,
+      URI_GESTIONNAIRES_COMMANDES + '/' + id + '/livraison',
       i
     );
   }

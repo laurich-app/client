@@ -103,6 +103,7 @@ export const panierReducer = createReducer(
     return JSON.parse(JSON.stringify(emptyState));
   }),
   on(VALIDER_PANIER, () => {
+    console.log('VALIDER_PANIER remove panier');
     localStorage.removeItem(STORAGE_ITEM_NAME);
     return JSON.parse(JSON.stringify(emptyState));
   })

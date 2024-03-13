@@ -1,0 +1,12 @@
+<form (ngSubmit)="onSubmit()">
+	<mat-form-field>
+		<mat-label for="etat_livraison">Choisit l'état</mat-label>
+		<mat-select [(value)]="etat" (selectionChange)="onEtatLivraisonSelectionChange($event)" name="etat_livraison"
+			id="etat_livraison" required>
+			@for (etat of etat_livraisons; track etat) {
+			<mat-option [value]="etat">{{etat}}</mat-option>
+			}
+		</mat-select>
+	</mat-form-field>
+	<input type="submit" value="Changer l'état" />
+</form>

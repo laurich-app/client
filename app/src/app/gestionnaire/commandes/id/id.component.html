@@ -1,1 +1,44 @@
-<p>id works!</p>
+@if(commande) {
+<!-- commande.component.html -->
+
+<mat-card>
+	<mat-card-header>
+		<mat-card-title>Détails de la commande</mat-card-title>
+	</mat-card-header>
+	<mat-card-content>
+		<div class="info">
+			<p><strong>Identifiant de la commande:</strong> {{ commande._id }}</p>
+			<p><strong>Date de création:</strong> {{ commande.date_creation | date }}</p>
+			<p><strong>Identifiant de l'utilisateur:</strong> {{ commande.id_utilisateur }}</p>
+			<p><strong>Identifiant de paiement:</strong> {{ commande.id_paiement }}</p>
+			<p><strong>Total:</strong> {{ commande.total }}</p>
+			<p><strong>Numéro:</strong> {{ commande.numero }}</p>
+			<p><strong>Etat de livraison:</strong> {{ commande.etat_livraison }}</p>
+			<p><strong>Statut de paiement:</strong> {{ commande.statut_paiement }}</p>
+		</div>
+		<div class="produits">
+			<h4>Produits de la commande</h4>
+			<mat-table [dataSource]="commande.produits">
+				<!-- colonnes -->
+				<ng-container matColumnDef="description">
+					<mat-header-cell *matHeaderCellDef>Description</mat-header-cell>
+					<mat-cell *matCellDef="let produit">{{ produit.description }}</mat-cell>
+				</ng-container>
+				<ng-container matColumnDef="prix_unitaire">
+					<mat-header-cell *matHeaderCellDef>Prix unitaire</mat-header-cell>
+					<mat-cell *matCellDef="let produit">{{ produit.prix_unitaire }}</mat-cell>
+				</ng-container>
+				<ng-container matColumnDef="quantite">
+					<mat-header-cell *matHeaderCellDef>Quantité</mat-header-cell>
+					<mat-cell *matCellDef="let produit">{{ produit.quantite }}</mat-cell>
+				</ng-container>
+				<!-- ajout des colonnes -->
+				<mat-header-row *matHeaderRowDef="['description', 'prix_unitaire', 'quantite']"></mat-header-row>
+				<mat-row *matRowDef="let row; columns: ['description', 'prix_unitaire', 'quantite'];"></mat-row>
+			</mat-table>
+		</div>
+	</mat-card-content>
+</mat-card>
+
+<app-livraison [commande]="commande" />
+}

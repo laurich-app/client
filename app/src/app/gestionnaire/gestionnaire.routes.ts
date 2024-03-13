@@ -14,9 +14,13 @@ import { ProduitsComponent } from './produits/produits.component';
 import { AjouterComponent as AjouterProduitsComponent } from './produits/ajouter/ajouter.component';
 import { ModifierComponent as ModifierProduitsComponent } from './produits/id/modifier/modifier.component';
 import { IdComponent as IDProduitsComponent } from './produits/id/id.component';
+import { CommandesComponent } from './commandes/commandes.component';
+import { IdComponent as IDCommandesComponent } from './commandes/id/id.component';
 
 export const gestionnaireRoutes: Routes = [
   { path: 'utilisateurs', component: UtilisateursComponent },
+  { path: 'commandes', component: CommandesComponent },
+  { path: 'commandes/:id', component: IDCommandesComponent },
   { path: 'produits', component: ProduitsComponent },
   { path: 'produits/ajouter', component: AjouterProduitsComponent },
   {
