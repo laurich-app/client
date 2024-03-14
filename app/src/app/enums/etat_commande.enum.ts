@@ -1,5 +1,4 @@
 export enum EtatCommande {
-  EN_COURS,
-  LIVRER,
-  EN_ATTENTE,
+  EN_COURS = 'EN_COURS',
+  LIVRER = 'LIVRER',
 }

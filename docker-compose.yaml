@@ -2,12 +2,13 @@ version: "3.9"
 services:
   service-reapprovisionnement:
     container_name: service-reappro
-    image: ghcr.io/laurich-app/service-reapprovisionnement:1.0.2
+    image: ghcr.io/laurich-app/service-reapprovisionnement:1.1.1
     environment:
       - CONSUL_HOST=discovery
       - CONSUL_PORT=8500
       - MONGO_URL=mongodb://user:pswd@mongo-reappro:27017/
       - MONGO_DATABASE=reappro
+      - RABBIT_HOST=rabbit
 
   mongo-reappro:
     image: mongo:7.0.5
@@ -52,7 +53,7 @@ services:
       - POSTGRES_PASSWORD=pswd
 
   service-utilisateur:
-    image: ghcr.io/laurich-app/service-utilisateur:1.1.0
+    image: ghcr.io/laurich-app/service-utilisateur:1.2.1
     environment:
       - URL_CONFIG_SERVEUR=http://serveur-conf:8888
       - CONSUL_HOST=discovery
@@ -62,6 +63,7 @@ services:
       - POSTGRES_URL=jdbc:postgresql://postgres:5432/service-utilisateur
       - POSTGRES_USER=user
       - POSTGRES_PSWD=pswd
+      - RABBIT_HOST=rabbit
     depends_on:
       - serveur-conf
       - discovery
@@ -74,7 +76,7 @@ services:
       - POSTGRES_PASSWORD=pswd
 
   service-catalogue:
-    image: ghcr.io/laurich-app/service-produits:1.0.3
+    image: ghcr.io/laurich-app/service-produits:1.2.1
     environment:
       - URL_CONFIG_SERVEUR=http://serveur-conf:8888
       - CONSUL_HOST=discovery
@@ -82,19 +84,21 @@ services:
       - POSTGRES_URL=jdbc:postgresql://postgres-catalogue:5432/service-catalogue
       - POSTGRES_USER=user
       - POSTGRES_PSWD=pswd
+      - RABBIT_HOST=rabbit
     depends_on:
       - serveur-conf
       - discovery
       - postgres-catalogue
 
   service-commande:
-    image: ghcr.io/laurich-app/service-commandes:1.0.4
+    image: ghcr.io/laurich-app/service-commandes:1.1.2
     environment:
       - URL_CONFIG_SERVEUR=http://serveur-conf:8888
       - CONSUL_HOST=discovery
       - CONSUL_PORT=8500
       - MONGO_URL=mongodb://user:pswd@mongo-commande:27017/
       - MONGO_DATABASE=commande
+      - RABBIT_HOST=rabbit
     depends_on:
       - serveur-conf
       - discovery
@@ -106,21 +110,5 @@ services:
       - MONGO_INITDB_ROOT_USERNAME=user
       - MONGO_INITDB_ROOT_PASSWORD=pswd
 
-  mongo-express:
-    image: mongo-express:1.0.2-20
-    ports:
-      - 8083:8081
-    environment:
-      ME_CONFIG_MONGODB_ADMINUSERNAME: user
-      ME_CONFIG_MONGODB_ADMINPASSWORD: pswd
-      ME_CONFIG_MONGODB_URL: mongodb://user:pswd@mongo-commande:27017/
-      ME_CONFIG_BASICAUTH_USERNAME: admin
-      ME_CONFIG_BASICAUTH_PASSWORD: admin
-      ME_CONFIG_MONGODB_SERVER: mongo-commande
-      ME_CONFIG_MONGODB_ENABLE_ADMIN: true
-
-  adminer:
-    image: adminer
-    restart: always
-    ports:
-      - 8082:8080
+  rabbit:
+    image: rabbitmq:3.12.13-management

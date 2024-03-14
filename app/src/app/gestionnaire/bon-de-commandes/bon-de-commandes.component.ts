@@ -13,6 +13,9 @@ import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 import { MatTableModule } from '@angular/material/table';
 import { MatIconModule } from '@angular/material/icon';
 import { RouterLink } from '@angular/router';
+import { EtatCommande } from '../../enums/etat_commande.enum';
+import { NOTIFICATION_CONDITION } from '../../store/notification.action';
+import { Store } from '@ngrx/store';
 
 @Component({
   selector: 'app-bon-de-commandes',
@@ -44,7 +47,10 @@ export class BonDeCommandesComponent implements OnInit {
   currentPage!: number;
   totalItems!: number;
 
-  constructor(private bonDeCommandesService: BonDeCommandesService) {}
+  constructor(
+    private bonDeCommandesService: BonDeCommandesService,
+    private store: Store<{}>
+  ) {}
 
   @ViewChild(MatPaginator) paginator!: MatPaginator;
 
@@ -71,5 +77,22 @@ export class BonDeCommandesComponent implements OnInit {
     this.currentPage = 0;
     this.totalItems = 0;
     this.getData(this.currentPage, this.pageSize);
+  }
+
+  livrerCommande(commande: BonCommandesResponseDTO) {
+    if (window.confirm('Le bon de commande a bien été livré ?')) {
+      this.bonDeCommandesService
+        .update(commande._id, { etat: EtatCommande.LIVRER })
+        .subscribe({
+          next: (e) => {
+            this.store.dispatch(
+              NOTIFICATION_CONDITION({
+                message: 'Bon de commande livré. Réapprovisionnement du stock.',
+              })
+            );
+            commande.etat_commande = EtatCommande.LIVRER;
+          },
+        });
+    }
   }
 }

@@ -43,7 +43,7 @@ export class BonDeCommandesService {
     i: ModifierEtatBonCommandesRequestDTO
   ): Observable<BonCommandesResponseDTO> {
     return this.http.put<BonCommandesResponseDTO>(
-      URI_BON_DE_COMMANDES + '/' + id,
+      URI_BON_DE_COMMANDES + '/' + id + '/etat',
       i
     );
   }

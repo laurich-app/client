@@ -38,6 +38,9 @@
 					<button mat-icon-button routerLink="/gestionnaire/bon_de_commandes/{{element._id}}">
 						<mat-icon>visibility</mat-icon>
 					</button>
+					<button mat-icon-button (click)="livrerCommande(element)">
+						<mat-icon>local_shipping</mat-icon>
+					</button>
 				</td>
 			</ng-container>
 
