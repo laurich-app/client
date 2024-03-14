@@ -32,7 +32,7 @@ import { Store } from '@ngrx/store';
 })
 export class BonDeCommandesComponent implements OnInit {
   displayedColumns: string[] = [
-    '_id',
+    'id',
     'date_creation',
     'quantite',
     'produit.libelle',
