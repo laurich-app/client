@@ -82,7 +82,7 @@ export class BonDeCommandesComponent implements OnInit {
   livrerCommande(commande: BonCommandesResponseDTO) {
     if (window.confirm('Le bon de commande a bien été livré ?')) {
       this.bonDeCommandesService
-        .update(commande._id, { etat: EtatCommande.LIVRER })
+        .update(commande.id, { etat: EtatCommande.LIVRER })
         .subscribe({
           next: (e) => {
             this.store.dispatch(

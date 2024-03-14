@@ -7,9 +7,9 @@
 	}
 	<div>
 		<table mat-table [dataSource]="bon_de_commandes" class="mat-elevation-z8">
-			<ng-container matColumnDef="_id">
+			<ng-container matColumnDef="id">
 				<th mat-header-cell *matHeaderCellDef>id</th>
-				<td mat-cell *matCellDef="let element">{{ element._id }}</td>
+				<td mat-cell *matCellDef="let element">{{ element.id }}</td>
 			</ng-container>
 
 			<ng-container matColumnDef="date_creation">
@@ -35,7 +35,7 @@
 			<ng-container matColumnDef="actions">
 				<th mat-header-cell *matHeaderCellDef>Actions</th>
 				<td mat-cell *matCellDef="let element">
-					<button mat-icon-button routerLink="/gestionnaire/bon_de_commandes/{{element._id}}">
+					<button mat-icon-button routerLink="/gestionnaire/bon_de_commandes/{{element.id}}">
 						<mat-icon>visibility</mat-icon>
 					</button>
 					<button mat-icon-button (click)="livrerCommande(element)">
