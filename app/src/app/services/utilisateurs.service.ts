@@ -11,7 +11,6 @@ import {
   URI_CONNEXION,
   URI_DECONNEXION,
   URI_INSCRIPTION,
-  URI_MOI,
   URI_RAFFRAICHISSEMENT_TOKEN,
   URI_USERS,
 } from '../utils/constants';
@@ -52,8 +51,8 @@ export class UtilisateursService {
     return this.http.delete<void>(URI_DECONNEXION);
   }
 
-  public me(): Observable<UtilisateurResponseDTO> {
-    return this.http.get<UtilisateurResponseDTO>(URI_MOI);
+  public getOneById(id: string): Observable<UtilisateurResponseDTO> {
+    return this.http.get<UtilisateurResponseDTO>(URI_USERS + '/' + id);
   }
 
   public getAll(
