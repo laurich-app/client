@@ -1,3 +1,29 @@
+<!-- fournisseur-details.component.html -->
 @if(fournisseur) {
-{{fournisseur.email}}
+<div>
+	<h2>Détails du Fournisseur</h2>
+	<p>ID: {{ fournisseur.id }}</p>
+	<p>Email: {{ fournisseur.email }}</p>
+	<p>Raison Sociale: {{ fournisseur.raison_sociale }}</p>
+	<h3>Produits du Fournisseur</h3>
+	<div>
+		@for(produit of fournisseur.produits; track produit.id_produit_catalogue){
+		<mat-card>
+			<mat-card-header>
+				<div mat-card-avatar class="example-header-image"></div>
+				<mat-card-title>Produit ID: {{ produit.id_produit_catalogue }}</mat-card-title>
+			</mat-card-header>
+			<mat-card-content>
+				<p>Prix unitaire fournisseur: {{ produit.prix_unitaire_fournisseur }}</p>
+			</mat-card-content>
+		</mat-card>
+		}
+	</div>
+</div>
+}
+
+@if(!fournisseur) {
+<div>
+	<p>Aucun fournisseur trouvé.</p>
+</div>
 }

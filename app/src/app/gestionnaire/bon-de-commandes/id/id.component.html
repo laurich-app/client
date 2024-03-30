@@ -1,1 +1,26 @@
-{{bon_de_commande}}
+@if(bon_de_commande) {
+<div>
+	<mat-card>
+		<mat-card-header>
+			<div mat-card-avatar class="example-header-image"></div>
+			<mat-card-title>{{ bon_de_commande.produit.libelle }}</mat-card-title>
+			<mat-card-subtitle>{{ bon_de_commande.date_creation }}</mat-card-subtitle>
+		</mat-card-header>
+		<mat-card-content>
+			<p>Quantité: {{ bon_de_commande.quantite }}</p>
+			<p>État de la commande: {{ bon_de_commande.etat_commande }}</p>
+			<p>Prix unitaire fournisseur: {{ bon_de_commande.produit.prix_unitaire_fournisseur }}</p>
+			<p>Description: {{ bon_de_commande.produit.description }}</p>
+			<p>Couleur: {{ bon_de_commande.produit.couleur }}</p>
+			<p>Sexe: {{ bon_de_commande.produit.sexe }}</p>
+			<p>Taille: {{ bon_de_commande.produit.taille }}</p>
+			<img [src]="bon_de_commande.produit.image_url" alt="Product Image">
+		</mat-card-content>
+	</mat-card>
+</div>
+}
+@if(!bon_de_commande) {
+<div>
+	<p>Aucun bon de commande trouvé.</p>
+</div>
+}
