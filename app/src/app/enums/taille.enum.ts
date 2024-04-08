@@ -4,5 +4,5 @@ export enum Taille {
   M = 'M',
   L = 'L',
   XL = 'XL',
-  XLL = 'XLL',
+  XXL = 'XXL',
 }
