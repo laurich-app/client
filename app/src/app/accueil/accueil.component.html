@@ -1,4 +1,4 @@
-<div class="content">
+<div class="content container">
 	<div class="content-produits">
 		<h1>Liste des produits :</h1>
 		@if (isLoading) {
@@ -7,13 +7,17 @@
 		</ng-container>
 		}
 
-		<mat-grid-list cols="2">
+		<!-- <mat-grid-list cols="2"> -->
+		<div class="row">
 			@for (produit of produits;track $index) {
-			<mat-grid-tile>
+			<!-- <mat-grid-tile> -->
+			<div class="col-md">
 				<app-produits [produit]="produit" />
-			</mat-grid-tile>
+			</div>
+			<!-- </mat-grid-tile> -->
 			}
-		</mat-grid-list>
+		</div>
+		<!-- </mat-grid-list> -->
 		<mat-paginator [length]="totalItems" [pageSize]="pageSize" (page)="onPageChange($event)" hidePageSize
 			aria-label="Select page of periodic elements">
 		</mat-paginator>

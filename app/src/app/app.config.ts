@@ -20,6 +20,7 @@ import { httpInterceptorProviders } from './interceptors/http-auth.interceptor';
 import { panierReducer } from './store/panier.reducers';
 import { PanierEffects } from './store/panier.effects';
 import { notificationReducer } from './store/notification.reducers';
+import { provideNoopAnimations } from '@angular/platform-browser/animations';
 
 export const appConfig: ApplicationConfig = {
   providers: [
@@ -28,11 +29,12 @@ export const appConfig: ApplicationConfig = {
     importProvidersFrom(HttpClientModule),
     httpInterceptorProviders,
     provideStore({
-      auth: authReducer,
-      panier: panierReducer,
-      notification: notificationReducer,
+        auth: authReducer,
+        panier: panierReducer,
+        notification: notificationReducer,
     }),
     provideEffects([AuthEffects, PanierEffects]),
     provideAnimationsAsync(),
-  ],
+    provideNoopAnimations()
+],
 };
