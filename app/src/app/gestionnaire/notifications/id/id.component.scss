@@ -1,0 +1,8 @@
+.mat-list-item-content {
+  span:first-of-type {
+    text-transform: uppercase; /* Met le texte en majuscules */
+    margin-right: 20px; /* Décalage de 20 pixels vers la droite */
+    /* Met le texte en gras */
+    font-weight: bold;
+  }
+}

@@ -1,0 +1,51 @@
+@if(notification){
+<mat-card style="padding: 20px;">
+	<mat-card-title>Notification</mat-card-title>
+	<mat-card-content>
+		<mat-list>
+			<mat-list-item>
+				<div class="mat-list-item-content" layout="row" layout-align="space-between center">
+					<span>ID:</span>
+					<span>{{ notification._id }}</span>
+				</div>
+			</mat-list-item>
+			<mat-list-item>
+				<div class="mat-list-item-content" layout="row" layout-align="space-between center">
+					<span>Email:</span>
+					<span>{{ notification.email }}</span>
+				</div>
+			</mat-list-item>
+			<mat-list-item>
+				<div class="mat-list-item-content" layout="row" layout-align="space-between center">
+					<span>Pseudo:</span>
+					<span>{{ notification.pseudo }}</span>
+				</div>
+			</mat-list-item>
+			<mat-list-item>
+				<div class="mat-list-item-content" layout="row" layout-align="space-between center">
+					<span>Date de création:</span>
+					<span>{{ formatDate() }}</span>
+				</div>
+			</mat-list-item>
+			<mat-list-item>
+				<div class="mat-list-item-content" layout="row" layout-align="space-between center">
+					<span>État:</span>
+					<span>{{ notification.etat }}</span>
+				</div>
+			</mat-list-item>
+			<mat-list-item>
+				<div class="mat-list-item-content" layout="row" layout-align="space-between center">
+					<span>Type:</span>
+					<span>{{ notification.type }}</span>
+				</div>
+			</mat-list-item>
+			<mat-list-item>
+				<div class="mat-list-item-content" layout="row" layout-align="space-between center">
+					<span>Fonction:</span>
+					<span>{{ notification.fonction }}</span>
+				</div>
+			</mat-list-item>
+		</mat-list>
+	</mat-card-content>
+</mat-card>
+}

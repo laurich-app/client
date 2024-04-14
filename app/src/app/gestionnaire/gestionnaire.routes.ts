@@ -16,6 +16,8 @@ import { ModifierComponent as ModifierProduitsComponent } from './produits/id/mo
 import { IdComponent as IDProduitsComponent } from './produits/id/id.component';
 import { CommandesComponent } from './commandes/commandes.component';
 import { IdComponent as IDCommandesComponent } from './commandes/id/id.component';
+import { NotificationsComponent } from './notifications/notifications.component';
+import { IdComponent as IDNotificationsComponent } from './notifications/id/id.component';
 
 export const gestionnaireRoutes: Routes = [
   { path: 'utilisateurs', component: UtilisateursComponent },
@@ -44,4 +46,6 @@ export const gestionnaireRoutes: Routes = [
   { path: 'fournisseurs/:id', component: IDFournisseurComponent },
   { path: 'bon_de_commandes', component: BonDeCommandesComponent },
   { path: 'bon_de_commandes/:id', component: IDBonDeCommandeComponent },
+  { path: 'notifications', component: NotificationsComponent },
+  { path: 'notifications/:id', component: IDNotificationsComponent },
 ];

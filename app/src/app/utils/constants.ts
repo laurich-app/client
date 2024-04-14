@@ -14,3 +14,4 @@ export const URI_GESTIONNAIRES_COMMANDES = `${environment.API_URL}/gestionnaires
 export const URI_PANIERS = `${environment.API_URL}/paniers`;
 export const URI_FOURNISSEURS = `${environment.API_URL}/fournisseurs`;
 export const URI_BON_DE_COMMANDES = `${environment.API_URL}/boncommandes`;
+export const URI_NOTIFICATIONS = `${environment.API_URL}/notifications`;
