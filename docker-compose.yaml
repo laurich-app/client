@@ -2,7 +2,7 @@ version: "3.9"
 services:
   service-reapprovisionnement:
     container_name: service-reappro
-    image: ghcr.io/laurich-app/service-reapprovisionnement:1.1.1
+    image: ghcr.io/laurich-app/service-reapprovisionnement:1.1.5
     environment:
       - CONSUL_HOST=discovery
       - CONSUL_PORT=8500
@@ -27,7 +27,7 @@ services:
       - 4200:4200
 
   service-passerelle:
-    image: ghcr.io/laurich-app/service-passerelle:1.1.0
+    image: ghcr.io/laurich-app/service-passerelle:1.1.3
     ports:
       - 8080:8080
     environment:
@@ -41,7 +41,7 @@ services:
       - 8500:8500
 
   serveur-conf:
-    image: ghcr.io/laurich-app/serveur-conf:0.0.3
+    image: ghcr.io/laurich-app/serveur-conf:1.0.1
     ports:
       - 8888:8888
 
@@ -53,7 +53,7 @@ services:
       - POSTGRES_PASSWORD=pswd
 
   service-utilisateur:
-    image: ghcr.io/laurich-app/service-utilisateur:1.2.1
+    image: ghcr.io/laurich-app/service-utilisateur:1.3.2
     environment:
       - URL_CONFIG_SERVEUR=http://serveur-conf:8888
       - CONSUL_HOST=discovery
@@ -76,7 +76,7 @@ services:
       - POSTGRES_PASSWORD=pswd
 
   service-catalogue:
-    image: ghcr.io/laurich-app/service-produits:1.2.1
+    image: ghcr.io/laurich-app/service-produits:1.2.2
     environment:
       - URL_CONFIG_SERVEUR=http://serveur-conf:8888
       - CONSUL_HOST=discovery
@@ -91,7 +91,7 @@ services:
       - postgres-catalogue
 
   service-commande:
-    image: ghcr.io/laurich-app/service-commandes:1.1.2
+    image: ghcr.io/laurich-app/service-commandes:1.1.4
     environment:
       - URL_CONFIG_SERVEUR=http://serveur-conf:8888
       - CONSUL_HOST=discovery

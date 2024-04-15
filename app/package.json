@@ -23,6 +23,7 @@
     "@ngrx/component": "^17.1.0",
     "@ngrx/effects": "^17.1.0",
     "@ngrx/store": "^17.1.0",
+    "bootstrap": "^5.3.3",
     "dayjs": "^1.11.10",
     "jose": "^4.13.1",
     "mdb-angular-ui-kit": "^6.0.0",

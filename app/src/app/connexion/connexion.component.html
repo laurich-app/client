@@ -1,26 +1,49 @@
 <form (ngSubmit)="submitForm()">
-	@if (errors && getObjectKeys(errors).length) {
-	<div class="error">
-		<ul>
-			@for (property of getObjectKeys(errors); track property) {
-			<li>{{property}}: {{errors[property]}}</li>
-			}
-		</ul>
-	</div>
-	}
-	<div>
-		<label for="email">Email :</label>
-		<input type="email" id="email" name="email" [(ngModel)]="formData.email" required>
-	</div>
-	<div>
-		<label for="motDePasse">Mot de passe :</label>
-		<input id="motDePasse" type="password" name="motDePasse" [(ngModel)]="formData.motDePasse" required />
-	</div>
-	<div>
-		<button type="submit"
-			[disabled]="loading || (formData.email.length == 0 || formData.motDePasse.length == 0)">Submit</button>
-		@if (loading) {
-		<span>Loading...</span>
-		}
-	</div>
+  @if (errors && getObjectKeys(errors).length) {
+    <div class="error">
+      <ul>
+        @for (property of getObjectKeys(errors); track property) {
+          <li>{{property}}: {{errors[property]}}</li>
+        }
+      </ul>
+    </div>
+  }
+  <div class="container card-container">
+    <div class="d-flex  align-items-center  justify-content-center">
+      <img src="../../assets/image/logo.PNG" width="150" height="150" alt="Logo de la Laurich'App">
+    </div>
+    <div class="row justify-content-center">
+      <div class="col">
+        <div class="row justify-content-center mb-0">
+          <div class="col-sm">
+            <p class="text-center">Connectez-vous et commencez votre shopping</p>
+          </div>
+        </div>
+        <div class="row mb-2 mt-4">
+          <div class="col-sm form-group">
+            <label for="email">Email</label>
+            <input class="form-control" type="email" id="email" name="email" placeholder="example@gmail.com" [(ngModel)]="formData.email" required>
+          </div>
+        </div>
+        <div class="row mb-3">
+          <div class="col-sm form-group">
+            <label for="motDePasse">Mot de passe</label>
+            <input class="form-control" id="motDePasse" type="password" name="motDePasse" placeholder="**********" [(ngModel)]="formData.motDePasse" required />
+          </div>
+        </div>
+        <div class="row justify-content-center mb-5">
+          <div class="col-10  d-flex  align-items-center  justify-content-center">
+            <button type="submit" class="btn btn-primary"
+                    [disabled]="loading || (formData.email.length == 0 || formData.motDePasse.length == 0)">Submit</button>
+          </div>
+          <div class="text-center mt-3">
+            @if (loading) {
+              <div class="spinner-border" role="status">
+              </div>
+            }
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
 </form>
