@@ -1,8 +1,18 @@
 .card-container {
-  background: #ffffff;
+  background-color: black;
+  color: white;
   border-radius: 8px;
   box-shadow: 1px 2px 8px rgba(0, 0, 0, 0.65);
   height: 480px;
   margin: 6rem auto 8.1rem auto;
   width: 329px;
+}
+
+.btn-gold-submit {
+  background-color: #d2c678;
+  color: black;
+}
+
+.phrase{
+  font-style: italic;
 }
