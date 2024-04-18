@@ -1,49 +1,49 @@
 <!--<mat-toolbar class="navbar">-->
 
-  <div class="logo-centre">
-  <img src="../../assets/image/logo-blanc-sansbg.png" width="100" height="100" alt="Logo de la Laurich'App">
+<div class="logo-centre">
+  <img src="assets/image/logo-blanc-sansbg.png" width="100" height="100" alt="Logo de la Laurich'App">
+</div>
+
+<div class="content-menu align-items-center">
+  <div class="content-accueil">
+    <a mat-raised-button id="btn-gold-accueil" [routerLinkActive]="'active'" [routerLinkActiveOptions]="{ exact: true }"
+      [routerLink]="['/']">Accueil</a>
   </div>
 
-  <div class="content-menu align-items-center">
-    <div class="content-accueil">
-      <a mat-raised-button id="btn-gold-accueil"  [routerLinkActive]="'active'" [routerLinkActiveOptions]="{ exact: true }"
-        [routerLink]="['/']">Accueil</a>
-    </div>
-
-    <div class="content-connexion d-flex flex-row align-items-center">
-      <ng-container *ngrxLet="auth$; let a; let e = error; let c = complete">
-        @if (isAdmin(a)) {
-        <a mat-raised-button id="btn-gold-admin" [routerLinkActive]="'active'" [routerLinkActiveOptions]="{ exact: true }"
-          [routerLink]="['/gestionnaire']">Espace administrateur</a>
-        }
-        @if (!a.isLoggedIn) {
-        <a mat-raised-button  id="btn-gold-connexion" [routerLinkActive]="'active'" [routerLinkActiveOptions]="{ exact: true }"
-          [routerLink]="['/connexion']">Connexion</a>
-        <a  mat-raised-button id="btn-gold-inscription" [routerLinkActive]="'active'" [routerLinkActiveOptions]="{ exact: true }"
-          [routerLink]="['/inscription']">Inscription</a>
-        }
+  <div class="content-connexion d-flex flex-row align-items-center">
+    <ng-container *ngrxLet="auth$; let a; let e = error; let c = complete">
+      @if (isAdmin(a)) {
+      <a mat-raised-button id="btn-gold-admin" [routerLinkActive]="'active'" [routerLinkActiveOptions]="{ exact: true }"
+        [routerLink]="['/gestionnaire']">Espace administrateur</a>
+      }
+      @if (!a.isLoggedIn) {
+      <a mat-raised-button id="btn-gold-connexion" [routerLinkActive]="'active'"
+        [routerLinkActiveOptions]="{ exact: true }" [routerLink]="['/connexion']">Connexion</a>
+      <a mat-raised-button id="btn-gold-inscription" [routerLinkActive]="'active'"
+        [routerLinkActiveOptions]="{ exact: true }" [routerLink]="['/inscription']">Inscription</a>
+      }
+      @if (a.isLoggedIn) {
+      <button mat-raised-button id="btn-gold-deconnexion" (click)="disconnect()">
+        Déconnexion
+      </button>
+      }
+      <div class="user-logged">
         @if (a.isLoggedIn) {
-        <button mat-raised-button id="btn-gold-deconnexion" (click)="disconnect()">
-          Déconnexion
+        <button mat-icon-button id="btn-gold-profile" [routerLink]="'/profile'">
+          <mat-icon aria-hidden="false">account_circle</mat-icon>
         </button>
         }
-        <div class="user-logged">
-          @if (a.isLoggedIn) {
-          <button mat-icon-button id="btn-gold-profile" [routerLink]="'/profile'">
-            <mat-icon aria-hidden="false">account_circle</mat-icon>
-          </button>
-          }
-        </div>
-      </ng-container>
-      <ng-container *ngrxLet="panier$; let p; let e = error; let c = complete">
-        <div class="shopping-cart">
-          <button mat-icon-button id="btn-gold-shopping" [routerLink]="'/panier'" matBadge="{{p.produits.length}}" matBadgePosition="below"
-            matBadgeOverlap matBadgeHidden="{{p.produits.length == 0}}" matBadgeColor="accent">
-            <mat-icon aria-hidden="false">shopping_cart</mat-icon>
-          </button>
-        </div>
-      </ng-container>
-    </div>
+      </div>
+    </ng-container>
+    <ng-container *ngrxLet="panier$; let p; let e = error; let c = complete">
+      <div class="shopping-cart">
+        <button mat-icon-button id="btn-gold-shopping" [routerLink]="'/panier'" matBadge="{{p.produits.length}}"
+          matBadgePosition="below" matBadgeOverlap matBadgeHidden="{{p.produits.length == 0}}" matBadgeColor="accent">
+          <mat-icon aria-hidden="false">shopping_cart</mat-icon>
+        </button>
+      </div>
+    </ng-container>
   </div>
+</div>
 <!--</mat-toolbar>-->
 <router-outlet />
